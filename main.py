@@ -1,16 +1,18 @@
-# This is a sample Python script.
+from flask import Flask
+from flask_restful import Api, Resource
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+from base import detector
+app = Flask(__name__)
+api = Api(app)
 
+class Main(Resource):
+    def get(self, cod, img1, img2):
+        if cod == '7weuog87o8g87t86tg6ogt76tugo76tg67tg67tgyb':
+            response = detector(img1,img2)
+        else:
+            response = 'Does not run'
+        return {'response' : response}
+api.add_resource(Main, '/imgimg/<string:cod>/<string:img1>/<string:img2>')
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    app.run(debug=True)
